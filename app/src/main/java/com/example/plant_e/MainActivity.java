@@ -16,8 +16,11 @@ import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
+    public static ArrayList<JournalCard> JournalList;
     private BottomNavigationView btmNavi;
     private DrawerLayout drawer;
 
@@ -25,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        JournalList = new ArrayList<>();
         btmNavi = findViewById(R.id.btmNavi);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
