@@ -74,7 +74,8 @@ public class JournalFragment extends Fragment implements CustomDialog.OnInputSel
     RecyclerAdapter recyclerAdapter;
     FloatingActionButton fab;
     TextView textView2, textView3;
-    ArrayList<JournalCard> JournalList = new ArrayList<>();
+    ArrayList<JournalCard> JournalList = MainActivity.JournalList;
+
 //    ConstraintLayout Recyclerlayout;
 
 
@@ -114,6 +115,14 @@ public class JournalFragment extends Fragment implements CustomDialog.OnInputSel
             }
         });
 
+        textView2 = view.findViewById(R.id.textView2);
+        textView3 = view.findViewById(R.id.textView3);
+
+
+        recyclerView = view.findViewById(R.id.RecyclerView);
+        recyclerAdapter = new RecyclerAdapter(JournalList);
+        recyclerView.setAdapter(recyclerAdapter);
+
 
 
         // Inflate the layout for this fragment
@@ -133,13 +142,7 @@ public class JournalFragment extends Fragment implements CustomDialog.OnInputSel
 //        Recyclerlayout.addView(R.layout.fragment_journal);
 //        setContentView();
 
-        textView2 = view.findViewById(R.id.textView2);
-        textView3 = view.findViewById(R.id.textView3);
 
-
-        recyclerView = view.findViewById(R.id.RecyclerView);
-        recyclerAdapter = new RecyclerAdapter(JournalList);
-        recyclerView.setAdapter(recyclerAdapter);
 
 
 
