@@ -1,10 +1,15 @@
 package com.example.plant_e;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +19,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.format.DateTimeFormatter;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +35,7 @@ import java.util.Map;
  * Use the {@link JournalFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class JournalFragment extends Fragment {
+public class JournalFragment extends Fragment implements CustomDialog.OnInputSelected{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,14 +68,27 @@ public class JournalFragment extends Fragment {
         return fragment;
     }
     //-------------------------outside-------------------------------
-    Map<String, JournalStore> journalStoreMap = new HashMap<>();
+//    Map<String, JournalStore> journalStoreMap = new HashMap<>();
+
+    RecyclerView recyclerView;
+    RecyclerAdapter recyclerAdapter;
+    FloatingActionButton fab;
+    TextView textView2, textView3;
+    ArrayList<JournalCard> JournalList = new ArrayList<>();
+//    ConstraintLayout Recyclerlayout;
+
 
 
     //----------------------------------------------------------------
 
+
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -75,80 +98,122 @@ public class JournalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_journal, container, false);
+
+        //Floating action button
+
+
+        fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomDialog dialog = new CustomDialog();
+                dialog.setTargetFragment(JournalFragment.this, 1);
+                dialog.show(getFragmentManager(), "CustomDialog");
+            }
+        });
+
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_journal, container, false);
+        return view;
+
+
+
+
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+//        Recyclerlayout = view.findViewById(R.id.recyclerlayout);
+//        Recyclerlayout.addView(R.layout.fragment_journal);
+//        setContentView();
 
-        final TextView txtTitle = (TextView) view.findViewById(R.id.txtTitle);
-        final TextView txtDate = (TextView) view.findViewById(R.id.txtDate);
-        final EditText txtDescription = (EditText) getActivity().findViewById(R.id.txtDescription);
-        ImageButton btnBackwards = view.findViewById(R.id.btnBackwards);
-        Button btnSave = view.findViewById(R.id.btnSave);
-        ImageButton btnForwards = view.findViewById(R.id.btnForwards);
-
+        textView2 = view.findViewById(R.id.textView2);
+        textView3 = view.findViewById(R.id.textView3);
 
 
-
-        // ----------------- Date formatting-------------------------------------------
-        final LocalDate[] dateObj = {LocalDate.now()};
-        final DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        String formattedDate = dateObj[0].format(myFormat);
-
-        txtDate.setText(formattedDate);
-        final JournalStore journalInstance = new JournalStore(formattedDate);  //date instance
-
-        //----------Hashmap-------------------------------------------
-//        if (journalStoreMap.get(txtDate.getText().toString()) != null){
-//            txtDescription.setText(journalStoreMap.get(txtDate.getText().toString()).getDescription());  // if Date instance already inside Hashmap
-//        }
-
-        //--------------btnBackwards onClickListener----------------------------------------
-        btnBackwards.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                dateObj[0] = dateObj[0].minusDays(1);
-                txtDate.setText(dateObj[0].format(myFormat));
-
-                if (journalStoreMap.get(txtDate.getText().toString()) != null){
-                    txtDescription.setText(journalStoreMap.get(txtDate.getText().toString()).getDescription());  // if Date instance already inside Hashmap
-                }
-
-            }
-        });
-
-        //---------------btnForwards onClickListener----------------------------------------
-        btnForwards.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                dateObj[0] = dateObj[0].plusDays(1);
-                txtDate.setText(dateObj[0].format(myFormat));
-
-                if (journalStoreMap.get(txtDate.getText().toString()) != null){
-                    txtDescription.setText(journalStoreMap.get(txtDate.getText().toString()).getDescription());  // if Date instance already inside Hashmap
-                }
-
-            }
-        });
-
-        //--------------btnSave onClickListener---------------------------------------------
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                journalStoreMap.put(txtDate.getText().toString(), new JournalStore(txtDate.getText().toString(), txtDescription.getText().toString()));
-
-            }
-        });
+        recyclerView = view.findViewById(R.id.RecyclerView);
+        recyclerAdapter = new RecyclerAdapter(JournalList);
+        recyclerView.setAdapter(recyclerAdapter);
 
 
 
+//        final TextView txtTitle = (TextView) view.findViewById(R.id.txtTitle);
+//        final TextView txtDate = (TextView) view.findViewById(R.id.txtDate);
+//        final EditText txtDescription = (EditText) getActivity().findViewById(R.id.txtDescription);
+//        ImageButton btnBackwards = view.findViewById(R.id.btnBackwards);
+//        Button btnSave = view.findViewById(R.id.btnSave);
+//        ImageButton btnForwards = view.findViewById(R.id.btnForwards);
+//
+//
+//
+//
+//        // ----------------- Date formatting-------------------------------------------
+//        final LocalDate[] dateObj = {LocalDate.now()};
+//        final DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+//        String formattedDate = dateObj[0].format(myFormat);
+//
+//        txtDate.setText(formattedDate);
+//        final JournalStore journalInstance = new JournalStore(formattedDate);  //date instance
+//
+//        //----------Hashmap-------------------------------------------
+////        if (journalStoreMap.get(txtDate.getText().toString()) != null){
+////            txtDescription.setText(journalStoreMap.get(txtDate.getText().toString()).getDescription());  // if Date instance already inside Hashmap
+////        }
+//
+//        //--------------btnBackwards onClickListener----------------------------------------
+//        btnBackwards.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                dateObj[0] = dateObj[0].minusDays(1);
+//                txtDate.setText(dateObj[0].format(myFormat));
+//
+//                if (journalStoreMap.get(txtDate.getText().toString()) != null){
+//                    txtDescription.setText(journalStoreMap.get(txtDate.getText().toString()).getDescription());  // if Date instance already inside Hashmap
+//                }
+//
+//            }
+//        });
+//
+//        //---------------btnForwards onClickListener----------------------------------------
+//        btnForwards.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                dateObj[0] = dateObj[0].plusDays(1);
+//                txtDate.setText(dateObj[0].format(myFormat));
+//
+//                if (journalStoreMap.get(txtDate.getText().toString()) != null){
+//                    txtDescription.setText(journalStoreMap.get(txtDate.getText().toString()).getDescription());  // if Date instance already inside Hashmap
+//                }
+//
+//            }
+//        });
+//
+//        //--------------btnSave onClickListener---------------------------------------------
+//        btnSave.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                journalStoreMap.put(txtDate.getText().toString(), new JournalStore(txtDate.getText().toString(), txtDescription.getText().toString()));
+//
+//            }
+//        });
+//
 
+
+
+    }
+
+
+    @Override
+    public void sendInput(String Title, String Desc, String DateStamp, String TimeStamp) {
+        JournalList.add(new JournalCard(DateStamp, TimeStamp,Title,Desc,"Plant Type"));
     }
 }
