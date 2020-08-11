@@ -216,7 +216,7 @@ public class JournalFragment extends Fragment implements CustomDialog.OnInputSel
 
 
     @Override
-    public void sendInput(String Title, String Desc, String DateStamp, String TimeStamp) {
-        JournalList.add(new JournalCard(DateStamp, TimeStamp,Title,Desc,"Plant Type"));
+    public void sendInput(String Title, String Desc, String DateStamp, String TimeStamp, String DayStamp) {
+        JournalList.add(new JournalCard(DateStamp, TimeStamp,Title,Desc,"Plant Type", DayStamp));
     }
 }

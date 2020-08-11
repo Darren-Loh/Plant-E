@@ -45,7 +45,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.Planttype.setText(JournalList.get(position).getPlant());
         holder.Timestamp.setText(JournalList.get(position).getTimestamp());
         holder.Datestamp.setText(JournalList.get(position).getDatestamp());
-
+        holder.DayStamp.setText(JournalList.get(position).getDaystamp());
         boolean isexpand = JournalList.get(position).isIsexpanded();
         holder.expandablelayout.setVisibility(isexpand ? View.VISIBLE : View.GONE);
     }
@@ -63,7 +63,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     //defines the rows
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView JournalTitle, JournalDesc, Datestamp, Timestamp, Planttype ;
+        TextView JournalTitle, JournalDesc, Datestamp, Timestamp, Planttype, DayStamp ;
         ConstraintLayout expandablelayout, titletab;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,6 +71,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             expandablelayout = itemView.findViewById(R.id.Expandabletab);
             JournalTitle = itemView.findViewById(R.id.JournalTitle);
             titletab = itemView.findViewById(R.id.TitleTab);
+            DayStamp = itemView.findViewById(R.id.daystamp);
 
             JournalDesc = itemView.findViewById(R.id.JournalDesc);
             Datestamp = itemView.findViewById(R.id.JournalDate);
