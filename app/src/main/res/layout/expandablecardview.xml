@@ -22,7 +22,7 @@
             android:layout_marginBottom="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/Expandabletab"
+                android:id="@+id/ExpandabletabHome"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
@@ -30,11 +30,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TitleTab"
+                app:layout_constraintTop_toBottomOf="@+id/TitleTabHome"
                 app:layout_constraintVertical_bias="0.0">
 
                 <TextView
-                    android:id="@+id/PlantName"
+                    android:id="@+id/PlantNameHome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -44,26 +44,17 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Journal Entry"
-                    app:layout_constraintStart_toStartOf="@+id/PlantName"
-                    app:layout_constraintTop_toBottomOf="@+id/PlantName" />
-
-                <TextView
                     android:id="@+id/JournalDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="TextView"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView6"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6"
+                    app:layout_constraintStart_toStartOf="@+id/PlantNameHome"
+                    app:layout_constraintTop_toBottomOf="@+id/PlantNameHome"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
@@ -75,13 +66,13 @@
                     android:text="TimeStamp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.985"
-                    app:layout_constraintStart_toEndOf="@+id/PlantName"
+                    app:layout_constraintStart_toEndOf="@+id/PlantNameHome"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/TitleTab"
+                android:id="@+id/TitleTabHome"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

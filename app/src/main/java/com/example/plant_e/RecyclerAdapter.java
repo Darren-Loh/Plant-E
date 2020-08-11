@@ -68,15 +68,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            expandablelayout = itemView.findViewById(R.id.Expandabletab);
+            expandablelayout = itemView.findViewById(R.id.ExpandabletabHome);
             JournalTitle = itemView.findViewById(R.id.JournalTitle);
-            titletab = itemView.findViewById(R.id.TitleTab);
+            titletab = itemView.findViewById(R.id.TitleTabHome);
             DayStamp = itemView.findViewById(R.id.daystamp);
 
             JournalDesc = itemView.findViewById(R.id.JournalDesc);
             Datestamp = itemView.findViewById(R.id.JournalDate);
             Timestamp = itemView.findViewById(R.id.TimeStamp);
-            Planttype = itemView.findViewById(R.id.PlantName);
+            Planttype = itemView.findViewById(R.id.PlantNameHome);
 
             titletab.setOnClickListener(new View.OnClickListener() {
                 @Override

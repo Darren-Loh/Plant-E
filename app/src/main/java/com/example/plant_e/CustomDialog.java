@@ -58,15 +58,8 @@ public class CustomDialog extends DialogFragment {
         SimpleDateFormat dayonly = new SimpleDateFormat("EEEE");
         Date currentdatetime = new Date();
 
-
-
-
-
-
         datestamp.setText(dateonly.format(currentdatetime));
         timestamp.setText(timeonly.format(currentdatetime));
-//        datestamp.setText(dateonly.format(dateformat));
-//        timestamp.setText(timeonly.format(timeformat));
         daystamp.setText(dayonly.format(currentdatetime));
 
 
@@ -94,7 +87,7 @@ public class CustomDialog extends DialogFragment {
                     titleinput.setError("Please give this journal entry a title.");
                     titleinput.requestFocus();
                 }
-                else if(Descinput.equals("")){
+                if(Descinput.equals("")){
                     descriptioninput.setError("Please give this journal entry a description.");
                     descriptioninput.requestFocus();
                 }
