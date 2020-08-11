@@ -15,6 +15,8 @@ import androidx.fragment.app.DialogFragment;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.LocalTime;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZoneOffset;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.text.DateFormat;
@@ -25,7 +27,7 @@ public class CustomDialog extends DialogFragment {
 
 
     public interface  OnInputSelected{
-        void sendInput(String Title, String Desc, String DateStamp, String TimeStamp);
+        void sendInput(String Title, String Desc, String DateStamp, String TimeStamp, String DayStamp);
     }
 
     public OnInputSelected inputSelected;
@@ -33,7 +35,7 @@ public class CustomDialog extends DialogFragment {
 
     //widgets
     private EditText titleinput, descriptioninput;
-    private TextView datestamp, timestamp, confirmbutton, cancelbutton;
+    private TextView datestamp, timestamp, confirmbutton, cancelbutton, daystamp;
 
 
     @Nullable
@@ -48,24 +50,29 @@ public class CustomDialog extends DialogFragment {
         timestamp = view.findViewById(R.id.DialogTimestamp);
         confirmbutton = view.findViewById(R.id.ConfirmButton);
         cancelbutton = view.findViewById(R.id.CancelButton);
+        daystamp = view.findViewById(R.id.DialogDay);
 
-        //Time and Datestamps
-//        SimpleDateFormat dateonly = new SimpleDateFormat("dd/MM/yyyy");
-//        SimpleDateFormat timeonly = new SimpleDateFormat("HH:mm");
-//        Date currentdatetime = new Date();
-        LocalDate dateonly = LocalDate.now();
-        LocalTime timeonly = LocalTime.now().plusHours(8);
-        DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter timeformat = DateTimeFormatter.ofPattern("HH:mm");
+//        Time and Datestamps
+        SimpleDateFormat dateonly = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat timeonly = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat dayonly = new SimpleDateFormat("EEEE");
+        Date currentdatetime = new Date();
 
 
-//        datestamp.setText(dateonly.format(currentdatetime));
-//        timestamp.setText(timeonly.format(currentdatetime));
-        datestamp.setText(dateonly.format(dateformat));
-        timestamp.setText(timeonly.format(timeformat));
+
+
+
+
+        datestamp.setText(dateonly.format(currentdatetime));
+        timestamp.setText(timeonly.format(currentdatetime));
+//        datestamp.setText(dateonly.format(dateformat));
+//        timestamp.setText(timeonly.format(timeformat));
+        daystamp.setText(dayonly.format(currentdatetime));
+
 
         final String datestampvalue = datestamp.getText().toString();
         final String timestampvalue = timestamp.getText().toString();
+        final String daystampvalue = daystamp.getText().toString();
 
 
 
@@ -92,7 +99,7 @@ public class CustomDialog extends DialogFragment {
                     descriptioninput.requestFocus();
                 }
                 else{
-                    inputSelected.sendInput(Titleinput, Descinput, datestampvalue, timestampvalue );
+                    inputSelected.sendInput(Titleinput, Descinput, datestampvalue, timestampvalue , daystampvalue);
                 }
                 getDialog().dismiss();
 

@@ -7,9 +7,10 @@ public class JournalCard {
     String Title;
     String description;
     String plant;
+    String daystamp;
     boolean isexpanded;
 
-    public JournalCard(String datestamp, String timestamp, String title, String description, String plant) {
+    public JournalCard(String datestamp, String timestamp, String title, String description, String plant, String daystamp) {
         this.datestamp = datestamp;
         Timestamp = timestamp;
         Title = title;
@@ -17,6 +18,15 @@ public class JournalCard {
 //        this.image = image;
         this.plant = plant;
         this.isexpanded = false;
+        this.daystamp = daystamp;
+    }
+
+    public String getDaystamp() {
+        return daystamp;
+    }
+
+    public void setDaystamp(String daystamp) {
+        this.daystamp = daystamp;
     }
 
     public boolean isIsexpanded() {
