@@ -12,6 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.LocalTime;
+import org.threeten.bp.format.DateTimeFormatter;
+
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -44,12 +50,19 @@ public class CustomDialog extends DialogFragment {
         cancelbutton = view.findViewById(R.id.CancelButton);
 
         //Time and Datestamps
-        SimpleDateFormat dateonly = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat timeonly = new SimpleDateFormat("HH:mm");
-        Date currentdatetime = new Date();
+//        SimpleDateFormat dateonly = new SimpleDateFormat("dd/MM/yyyy");
+//        SimpleDateFormat timeonly = new SimpleDateFormat("HH:mm");
+//        Date currentdatetime = new Date();
+        LocalDate dateonly = LocalDate.now();
+        LocalTime timeonly = LocalTime.now().plusHours(8);
+        DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter timeformat = DateTimeFormatter.ofPattern("HH:mm");
 
-        datestamp.setText(dateonly.format(currentdatetime));
-        timestamp.setText(timeonly.format(currentdatetime));
+
+//        datestamp.setText(dateonly.format(currentdatetime));
+//        timestamp.setText(timeonly.format(currentdatetime));
+        datestamp.setText(dateonly.format(dateformat));
+        timestamp.setText(timeonly.format(timeformat));
 
         final String datestampvalue = datestamp.getText().toString();
         final String timestampvalue = timestamp.getText().toString();
