@@ -1,12 +1,23 @@
 package com.example.plant_e;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,5 +71,42 @@ public class PlantDiagnosisFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_plant_diagnosis, container, false);
+    }
+//------------------outside--------------------------------------------------
+    ImageView cameraImage;
+    Button cameraButton;
+//----------------------------------------------------------------------------
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        cameraImage = view.findViewById(R.id.camera_image_location);
+        cameraButton = view.findViewById(R.id.camera_button);
+
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(getActivity(), new String[]{
+                    Manifest.permission.CAMERA
+            }, 100);
+        }
+
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 100);
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == 100){
+            //Get Capture Image
+            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
+            //Set capture Image to ImageView
+            cameraImage.setImageBitmap(captureImage);
+        }
     }
 }
