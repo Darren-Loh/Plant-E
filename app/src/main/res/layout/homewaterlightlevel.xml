@@ -37,9 +37,9 @@
         android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -49,36 +49,41 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/homewaterlightbutton"
             android:drawableEnd="@drawable/water_droplet"
-            android:padding="7dp"
+            android:elevation="25dp"
+            android:padding="10dp"
             android:text="Water Plant"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textSize="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
 
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/homewaterlightbutton"
             android:drawableEnd="@drawable/ic_baseline_wb_incandescent_24"
-            android:padding="7dp"
+            android:elevation="25dp"
+            android:padding="10dp"
             android:text="On Light"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textSize="10dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button"
-
-            />
+            app:layout_constraintTop_toBottomOf="@+id/button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar

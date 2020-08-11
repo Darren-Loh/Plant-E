@@ -73,7 +73,7 @@ public class JournalFragment extends Fragment implements CustomDialog.OnInputSel
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
     FloatingActionButton fab;
-    TextView textView2, textView3;
+    TextView textView2, textView3, noentriestext;
     ArrayList<JournalCard> JournalList = MainActivity.JournalList;
 
 //    ConstraintLayout Recyclerlayout;
@@ -117,7 +117,7 @@ public class JournalFragment extends Fragment implements CustomDialog.OnInputSel
 
         textView2 = view.findViewById(R.id.textView2);
         textView3 = view.findViewById(R.id.textView3);
-
+        noentriestext = view.findViewById(R.id.Noentriestext);
 
         recyclerView = view.findViewById(R.id.RecyclerView);
         recyclerAdapter = new RecyclerAdapter(JournalList);
@@ -218,5 +218,8 @@ public class JournalFragment extends Fragment implements CustomDialog.OnInputSel
     @Override
     public void sendInput(String Title, String Desc, String DateStamp, String TimeStamp, String DayStamp) {
         JournalList.add(new JournalCard(DateStamp, TimeStamp,Title,Desc,"Plant Type", DayStamp));
+        if(JournalList.size()>0){
+            noentriestext.setVisibility(View.GONE);
+        }
     }
 }

@@ -100,20 +100,20 @@
             app:layout_constraintVertical_bias="0.0">
 
             <EditText
-                android:drawableStart="@drawable/ic_booksmall"
-                android:drawablePadding="7dp"
                 android:id="@+id/TitelHome"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:drawablePadding="7dp"
                 android:ems="10"
                 android:hint="Journal Title"
                 android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/OpenButton"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
 
@@ -127,17 +127,29 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.923"
                 app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
             <ImageButton
                 android:id="@+id/CloseButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:layout_constraintBottom_toBottomOf="@+id/OpenButton"
-                app:layout_constraintEnd_toEndOf="@+id/OpenButton"
-                app:srcCompat="@drawable/ic_baseline_keyboard_arrow_up_24"
+                android:layout_marginTop="12dp"
+                android:background="#FFF"
                 android:visibility="invisible"
-                android:background="#FFF"/>
+                app:layout_constraintEnd_toEndOf="@+id/OpenButton"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_keyboard_arrow_up_24" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="31dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_booksmall" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
