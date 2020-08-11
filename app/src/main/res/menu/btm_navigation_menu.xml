@@ -14,7 +14,7 @@
         android:icon="@drawable/ic_book"/>
     <item
         android:id="@+id/research"
-        android:title="Plant Diagnosis"
+        android:title="Diagnosis"
         android:icon="@drawable/ic_research"/>
 
 
