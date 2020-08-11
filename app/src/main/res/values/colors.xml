@@ -5,7 +5,8 @@
     <color name="colorPrimaryDark">#8BC34A</color>
     <color name="colorAccent">#8BC34A</color>
 
-
+    <color name="colorGradientDark">#611111</color>
+    <color name="colorGradientLight">#E30808</color>
 
 
     <!-- button style buttons -->

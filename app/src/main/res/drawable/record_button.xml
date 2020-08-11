@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+
+
+<!--<shape xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:shape="rectangle">-->
+
+<!--    <corners-->
+
+<!--        android:radius="40dp" />-->
+
+<!--    <gradient-->
+<!--        android:angle="45"-->
+<!--        android:endColor="#FA0101"-->
+<!--        android:startColor="#701515"-->
+<!--        android:type="linear" />-->
+
+<!--    &lt;!&ndash;If your shape requires only one solid color&ndash;&gt;-->
+<!--    &lt;!&ndash;<solid-->
+<!--        android:color="#FFFFFF" />&ndash;&gt;-->
+
+<!--    <size-->
+<!--        android:width="82dp"-->
+<!--        android:height="82dp" />-->
+
+<!--    &lt;!&ndash;Use android:dashWidth="2dp" and android:dashGap="2dp"-->
+<!--    to add dashes to your stroke&ndash;&gt;-->
+<!--    <stroke-->
+<!--        android:width="5dp"-->
+<!--        android:color="#271A1A" />-->
+
+<!--    &lt;!&ndash;If you want to add padding&ndash;&gt;-->
+<!--    &lt;!&ndash; <padding-->
+<!--         android:left="10dp"-->
+<!--         android:top="20dp"-->
+<!--         android:right="40dp"-->
+<!--         android:bottom="8dp" />&ndash;&gt;-->
+
+<!--</shape>-->
+
+
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/colorPrimaryDark">
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/colorPrimaryDark" />
+            <corners android:radius="40dp" />
+        </shape>
+    </item>
+
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="90"
+                android:endColor="@color/colorPrimary"
+                android:startColor="@color/colorPrimary"
+                android:type="linear" />
+            <corners android:radius="40dp" />
+        </shape>
+    </item>
+</ripple>

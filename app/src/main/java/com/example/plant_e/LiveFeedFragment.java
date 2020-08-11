@@ -1,12 +1,17 @@
 package com.example.plant_e;
 
+import android.media.Image;
 import android.os.Bundle;
 
+import androidx.appcompat.view.menu.MenuView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +64,20 @@ public class LiveFeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_live_feed, container, false);
+        View view = inflater.inflate(R.layout.fragment_live_feed, container, false);
+
+        Button RecordButton = view.findViewById(R.id.Recordbutton);
+        final ImageView VideoMockup = view.findViewById(R.id.VideoMockup);
+
+
+        RecordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity() , "Recording now!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        return view;
     }
 }
