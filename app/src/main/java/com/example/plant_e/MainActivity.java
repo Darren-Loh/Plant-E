@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         btmNavi = findViewById(R.id.btmNavi);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        final NavigationView navigationView = findViewById(R.id.nav_view);
 
         //-------------Navigation Bottom----------------------------------------------
 
@@ -41,10 +44,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
+                checkBtmNavi(btmNavi.getMenu(), true);
+                CheckDrawer(navigationView.getMenu(), false);
 
                 switch (item.getItemId()){
                     case R.id.home:
                         selectedFragment = new HomeFragment();
+
                         break;
                     case R.id.video:
                         selectedFragment = new LiveFeedFragment();
@@ -57,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
 
+
+
+
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedFragment).commit();
 
 
@@ -68,23 +78,29 @@ public class MainActivity extends AppCompatActivity {
         
         //----------------Navigation Drawer-----------------------------------------
 
-        drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                CheckDrawer(navigationView.getMenu(), true);
+                checkBtmNavi(btmNavi.getMenu(), false);
                 switch (item.getItemId()){
                     case R.id.nav_settings:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,
                                 new SettingsFragment()).commit();
+                        item.setChecked(true);
+
+
                         break;
                     case R.id.nav_profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,
                                 new ProfileFragment()).commit();
+                        item.setChecked(true);
+
+
                         break;
                     // add telegram and logout stuff here
                 }
-
 
                 drawer.closeDrawer(GravityCompat.START);
 
@@ -124,6 +140,20 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onBackPressed();
     }
+
+    public static void CheckDrawer(Menu menu, boolean checkable){
+        for (int i = 0; i < menu.size(); i++){
+            menu.getItem(i).setChecked(checkable);
+        }
+    }
+
+    public static void checkBtmNavi(Menu menu, boolean checkable){
+        for (int i = 0; i < menu.size(); i++){
+            menu.getItem(i).setCheckable(checkable);
+        }
+    }
+
+
 
 
 }
