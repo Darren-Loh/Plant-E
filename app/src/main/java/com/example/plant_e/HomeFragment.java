@@ -173,24 +173,8 @@ public class HomeFragment extends Fragment {
         });
 
         //-----------------------watering Count Down--------------------------------------------
-        Date currentDateTime = new Date();
 
-        SimpleDateFormat dateOnly = new SimpleDateFormat("dd MMMM yyyy");
-        SimpleDateFormat dayOnly = new SimpleDateFormat("EEEE");
-        lastWateredDetails.setText(String.format("00:00\n" + dateOnly.format(currentDateTime) + "\n" + dayOnly.format(currentDateTime)) );
-
-        SimpleDateFormat timeOnly = new SimpleDateFormat("HH:mm:ss");
-        int time_in_seconds = (Integer.parseInt(timeOnly.format(currentDateTime).split(":")[0]) *3600) +
-                (Integer.parseInt(timeOnly.format(currentDateTime).split(":")[1]) *60) +
-                (Integer.parseInt(timeOnly.format(currentDateTime).split(":")[2]));
-
-        int midnight = 86400;
-
-        int remaining_time = midnight - time_in_seconds;
-
-
-
-        remaining_time_long_in_milli = remaining_time * 1000;
+        timeUpdate();
 
 
         timerFunction();
@@ -223,7 +207,9 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFinish() {
+                timeUpdate();
                 timerFunction();
+
             }
         }.start();
     }
@@ -231,7 +217,29 @@ public class HomeFragment extends Fragment {
         long remaining_sec = (remaining_time_long_in_milli/1000)%60;
         long remaining_min = ((remaining_time_long_in_milli/1000)-remaining_sec)/60%60;
         long remaining_hr = ((remaining_time_long_in_milli/1000)-remaining_sec-(remaining_min*60))/60/60;
-        wateringTime.setText("" + remaining_hr + ":" + remaining_min + ":" + remaining_sec);
+        wateringTime.setText("" + remaining_hr + " h " + remaining_min + " m " + remaining_sec + " s ");
+    }
+
+    private void timeUpdate(){
+        Date currentDateTime = new Date();
+
+        SimpleDateFormat dateOnly = new SimpleDateFormat("dd MMMM yyyy");
+        SimpleDateFormat dayOnly = new SimpleDateFormat("EEEE");
+        lastWateredDetails.setText(String.format("00:00\n" + dateOnly.format(currentDateTime) + "\n" + dayOnly.format(currentDateTime)) );
+
+        SimpleDateFormat timeOnly = new SimpleDateFormat("HH:mm:ss");
+
+        int time_in_seconds = (Integer.parseInt(timeOnly.format(currentDateTime).split(":")[0]) *3600) +
+                (Integer.parseInt(timeOnly.format(currentDateTime).split(":")[1]) *60) +
+                (Integer.parseInt(timeOnly.format(currentDateTime).split(":")[2]));
+
+        int midnight = 86400;
+
+        int remaining_time = midnight - time_in_seconds;
+
+
+
+        remaining_time_long_in_milli = remaining_time * 1000;
     }
 //---------------------------------------------------------------------------------------------
 }
