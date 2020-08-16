@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,14 +68,17 @@ public class HomeFragment extends Fragment {
 
     ConstraintLayout TitletabHome;
     EditText  TitleHome, DescHome;
-    TextView PlantHome, ConfirmButtonHome, CancelButtonHome;
+    TextView PlantHome, ConfirmButtonHome, CancelButtonHome ,wateringTime, lastWateredDetails;
     ConstraintLayout ExpandableTabHome;
     ArrayList<JournalCard> JournalList = MainActivity.JournalList;
     ImageButton OpenButton, CloseButton;
 
     boolean IsExpanded = false;
 
-
+    //-----------------------watering Count Down--------------------------------------------
+    CountDownTimer countDownTimer;
+    private long remaining_time_long_in_milli;
+    //--------------------------------------------------------------------------------------
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,6 +94,10 @@ public class HomeFragment extends Fragment {
         TitleHome = view.findViewById(R.id.TitelHome);
         OpenButton = view.findViewById(R.id.OpenButton);
         CloseButton = view.findViewById(R.id.CloseButton);
+
+        wateringTime = view.findViewById(R.id.txt_watering_time);
+        lastWateredDetails = view.findViewById(R.id.txt_last_watered_details);
+
         return view;
     }
 
@@ -164,6 +172,31 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //-----------------------watering Count Down--------------------------------------------
+        Date currentDateTime = new Date();
+
+        SimpleDateFormat dateOnly = new SimpleDateFormat("dd MMMM yyyy");
+        SimpleDateFormat dayOnly = new SimpleDateFormat("EEEE");
+        lastWateredDetails.setText(String.format("00:00\n" + dateOnly.format(currentDateTime) + "\n" + dayOnly.format(currentDateTime)) );
+
+        SimpleDateFormat timeOnly = new SimpleDateFormat("HH:mm:ss");
+        int time_in_seconds = (Integer.parseInt(timeOnly.format(currentDateTime).split(":")[0]) *3600) +
+                (Integer.parseInt(timeOnly.format(currentDateTime).split(":")[1]) *60) +
+                (Integer.parseInt(timeOnly.format(currentDateTime).split(":")[2]));
+
+        int midnight = 86400;
+
+        int remaining_time = midnight - time_in_seconds;
+
+
+
+        remaining_time_long_in_milli = remaining_time * 1000;
+
+
+        timerFunction();
+        //--------------------------------------------------------------------------------------
+
+
     }
 
 
@@ -178,6 +211,27 @@ public class HomeFragment extends Fragment {
             OpenButton.setVisibility(View.VISIBLE);
             ExpandableTabHome.setVisibility(View.GONE);
         }
-
+//-----------------------watering Count Down---------------------------------------------------
     }
+    private void timerFunction(){
+        countDownTimer = new CountDownTimer(remaining_time_long_in_milli,1000) {
+            @Override
+            public void onTick(long l) {
+                remaining_time_long_in_milli = l;
+                updateCountDownText();
+            }
+
+            @Override
+            public void onFinish() {
+                timerFunction();
+            }
+        }.start();
+    }
+    private void updateCountDownText(){
+        long remaining_sec = (remaining_time_long_in_milli/1000)%60;
+        long remaining_min = ((remaining_time_long_in_milli/1000)-remaining_sec)/60%60;
+        long remaining_hr = ((remaining_time_long_in_milli/1000)-remaining_sec-(remaining_min*60))/60/60;
+        wateringTime.setText("" + remaining_hr + ":" + remaining_min + ":" + remaining_sec);
+    }
+//---------------------------------------------------------------------------------------------
 }
