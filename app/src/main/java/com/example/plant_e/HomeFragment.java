@@ -68,7 +68,7 @@ public class HomeFragment extends Fragment {
 
     ConstraintLayout TitletabHome;
     EditText  TitleHome, DescHome;
-    TextView PlantHome, ConfirmButtonHome, CancelButtonHome ,wateringTime, lastWateredDetails;
+    TextView PlantHome, ConfirmButtonHome, CancelButtonHome , hoursleft, minsleft, secondsleft, lastWateredDetails;
     ConstraintLayout ExpandableTabHome;
     ArrayList<JournalCard> JournalList = MainActivity.JournalList;
     ImageButton OpenButton, CloseButton;
@@ -95,7 +95,9 @@ public class HomeFragment extends Fragment {
         OpenButton = view.findViewById(R.id.OpenButton);
         CloseButton = view.findViewById(R.id.CloseButton);
 
-        wateringTime = view.findViewById(R.id.txt_watering_time);
+        hoursleft = view.findViewById(R.id.hoursleft);
+        minsleft = view.findViewById(R.id.minsleft);
+        secondsleft = view.findViewById(R.id.secondsleft);
         lastWateredDetails = view.findViewById(R.id.txt_last_watered_details);
 
         return view;
@@ -217,15 +219,38 @@ public class HomeFragment extends Fragment {
         long remaining_sec = (remaining_time_long_in_milli/1000)%60;
         long remaining_min = ((remaining_time_long_in_milli/1000)-remaining_sec)/60%60;
         long remaining_hr = ((remaining_time_long_in_milli/1000)-remaining_sec-(remaining_min*60))/60/60;
-        wateringTime.setText("" + remaining_hr + " h " + remaining_min + " m " + remaining_sec + " s ");
+        if(remaining_hr<10){
+            hoursleft.setText("0"+remaining_hr);
+        }
+        else {
+            hoursleft.setText(""+ remaining_hr);
+        }
+
+        if(remaining_min<10){
+            minsleft.setText("0"+remaining_min);
+        }
+        else {
+            minsleft.setText(""+remaining_min);
+        }
+
+        if(remaining_sec<10){
+            secondsleft.setText("0"+remaining_sec);
+        }
+        else {
+            secondsleft.setText(""+ remaining_sec);
+        }
+
+
+
+
     }
 
     private void timeUpdate(){
         Date currentDateTime = new Date();
 
-        SimpleDateFormat dateOnly = new SimpleDateFormat("dd MMMM yyyy");
-        SimpleDateFormat dayOnly = new SimpleDateFormat("EEEE");
-        lastWateredDetails.setText(String.format("00:00\n" + dateOnly.format(currentDateTime) + "\n" + dayOnly.format(currentDateTime)) );
+        SimpleDateFormat dateOnly = new SimpleDateFormat("dd MMM yyyy");
+        SimpleDateFormat dayOnly = new SimpleDateFormat("EEE");
+        lastWateredDetails.setText(String.format("00:00 AM\n" + dayOnly.format(currentDateTime))+" " +dateOnly.format(currentDateTime)   );
 
         SimpleDateFormat timeOnly = new SimpleDateFormat("HH:mm:ss");
 
